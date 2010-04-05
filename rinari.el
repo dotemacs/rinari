@@ -365,8 +365,8 @@ Supported markup languages are: Erb, Haml"
         (find-file (concat file (rinari-ending)))))))
 
 (defun rinari-rgrep (&optional arg)
-  "Search through the rails project for a string or `regexp'.
-With optional prefix argument just run `rgrep'."
+  "Search through the rails project for a string or `regexp'.  With
+optional prefix argument just run `rgrep'."
   (interactive "P")
   (grep-compute-defaults)
   (if arg (call-interactively 'rgrep)
