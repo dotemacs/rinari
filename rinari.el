@@ -119,23 +119,24 @@ to the environment variables outside of Emacs.")
 (defconst rinari-partial-regex "render :partial *=> *[@'\"]?\\([A-Za-z/_]+\\)['\"]?"
   "Regexp matching a partial rendering call.")
 
+
 (defadvice ruby-compilation-do (around rinari-compilation-do activate)
-  "Set default directory to the root of the rails application
-  before running ruby processes."
+  "Set default directory to the root of the rails application before
+running ruby processes."
   (let ((default-directory (or (rinari-root) default-directory)))
     ad-do-it
     (rinari-launch)))
 
 (defadvice ruby-compilation-rake (around rinari-compilation-rake activate)
-  "Set default directory to the root of the rails application
-  before running rake processes."
+  "Set default directory to the root of the rails application before
+running rake processes."
   (let ((default-directory (or (rinari-root) default-directory)))
     ad-do-it
     (rinari-launch)))
 
 (defadvice ruby-compilation-cap (around rinari-compilation-cap activate)
-  "Set default directory to the root of the rails application
-  before running cap processes."
+  "Set default directory to the root of the rails application before
+running cap processes."
   (let ((default-directory (or (rinari-root) default-directory)))
     ad-do-it
     (rinari-launch)))
