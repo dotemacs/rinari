@@ -34,6 +34,10 @@
   (should-match-partial "    render :partial => \"partial\"         " "partial")
   (should-match-partial "render    :partial => partial" "partial")
   (should-match-partial "render :partial    =>    @partial" "partial")
+  
+  ;; Parentheses
+  (should-match-partial "render(:partial => partial)" "partial")
+  (should-match-partial "render(:partial => @partial)" "partial")
   )
 
 (ert-deftest rinari-mode-prefixes ()
