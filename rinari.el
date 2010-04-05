@@ -371,8 +371,8 @@ optional prefix argument just run `rgrep'."
   (grep-compute-defaults)
   (if arg (call-interactively 'rgrep)
     (let ((query))
-      (if mark-active
           (setq query (buffer-substring-no-properties (point) (mark)))
+      (if (and transient-mark-mode mark-active)
         (setq query (thing-at-point 'word)))
       (funcall 'rgrep (read-from-minibuffer "search for: " query)
                rinari-rgrep-file-endings (rinari-root)))))
