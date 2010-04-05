@@ -105,7 +105,8 @@ leave this to the environment variables outside of Emacs.")
 
 (defvar rinari-minor-mode-prefixes
   (list ";" "'")
-  "List of characters, each of which will be bound (with C-c) as a rinari-minor-mode keymap prefix.")
+  "List of characters, each of which will be bound (with C-c) as a
+  rinari-minor-mode keymap prefix.")
 
 (defvar rinari-partial-regex "render :partial *=> *[@'\"]?\\([A-Za-z/_]+\\)['\"]?"
   "Regex that matches a partial rendering call.")
