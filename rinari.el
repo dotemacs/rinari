@@ -404,8 +404,8 @@ optional prefix argument just run `rgrep'."
     (message (shell-command-to-string (concat command " " type " " (read-from-minibuffer (format "create %s: " type) name))))))
 
 (defun rinari-ruby-values-from-render (controller action)
-  "Adjusts CONTROLLER and ACTION acording to keyword arguments in
-the hash at `point', then return (CONTROLLER . ACTION)"
+  "Adjusts CONTROLLER and ACTION according to keyword arguments in the
+hash at `point', then return (CONTROLLER . ACTION)"
   (let ((end (save-excursion
 	       (re-search-forward "[^,{(]$" nil t)
 	       (+ 1 (point)))))
