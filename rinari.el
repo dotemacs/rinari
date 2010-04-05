@@ -108,8 +108,16 @@ leave this to the environment variables outside of Emacs.")
   "List of characters, each of which will be bound (with C-c) as a
   rinari-minor-mode keymap prefix.")
 
-(defvar rinari-partial-regex "render :partial *=> *[@'\"]?\\([A-Za-z/_]+\\)['\"]?"
-  "Regex that matches a partial rendering call.")
+(defvar rinari-rgrep-file-endings
+  "*.[^l]*"
+  "Ending of files to search for matches using `rinari-rgrep'.")
+
+(defvar rinari-ruby-hash-regexp
+  "\\(:[^[:space:]]*?\\)[[:space:]]*\\(=>[[:space:]]*[\"\':]?\\([^[:space:]]*?\\)[\"\']?[[:space:]]*\\)?[,){}\n]"
+  "Regexp matching subsequent key => value pairs of a Ruby Hash.")
+
+(defconst rinari-partial-regex "render :partial *=> *[@'\"]?\\([A-Za-z/_]+\\)['\"]?"
+  "Regex matching a partial rendering call.")
 
 (defadvice ruby-compilation-do (around rinari-compilation-do activate)
   "Set default directory to the root of the rails application
@@ -354,10 +362,6 @@ Supported markup languages are: Erb, Haml"
           (setq file (concat default-directory "_" line)))
         (find-file (concat file (rinari-ending)))))))
 
-(defvar rinari-rgrep-file-endings
-  "*.[^l]*"
-  "Ending of files to search for matches using `rinari-rgrep'")
-
 (defun rinari-rgrep (&optional arg)
   "Search through the rails project for a string or `regexp'.
 With optional prefix argument just run `rgrep'."
@@ -396,10 +400,6 @@ With optional prefix argument just run `rgrep'."
              "rails generate")
            script)))
     (message (shell-command-to-string (concat command " " type " " (read-from-minibuffer (format "create %s: " type) name))))))
-
-(defvar rinari-ruby-hash-regexp
-  "\\(:[^[:space:]]*?\\)[[:space:]]*\\(=>[[:space:]]*[\"\':]?\\([^[:space:]]*?\\)[\"\']?[[:space:]]*\\)?[,){}\n]"
-  "Regexp to match subsequent key => value pairs of a ruby hash.")
 
 (defun rinari-ruby-values-from-render (controller action)
   "Adjusts CONTROLLER and ACTION acording to keyword arguments in
