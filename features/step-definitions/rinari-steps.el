@@ -17,3 +17,11 @@
 (When "I create a TAGS file"
       (lambda ()
         (write-file (expand-file-name "TAGS" current-rails-application))))
+
+(Given "Rinari is \\(active\\|inactive\\)"
+       (lambda (status)
+         (rinari-minor-mode (if (string= status "active") 1 -1))))
+
+(Then "Rinari should be active"
+      (lambda ()
+        (should rinari-minor-mode)))
