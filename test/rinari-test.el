@@ -40,6 +40,10 @@
   (should (equal 2 (length rinari-minor-mode-prefixes)))
   (should (member ";" rinari-minor-mode-prefixes))
   (should (member "'" rinari-minor-mode-prefixes)))
+
+(ert-deftest tags-file-name ()
+  (should (equal "TAGS" rinari-tags-file-name)))
+
 (defun should-match-partial (line partial)
   "Asserts that LINE, which is a partial call matches
 `rinari-partial-regex' and that there's only one grouping, which is
