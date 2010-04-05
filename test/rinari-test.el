@@ -44,6 +44,10 @@
 (ert-deftest tags-file-name ()
   (should (equal "TAGS" rinari-tags-file-name)))
 
+(ert-deftest rails-env ()
+  (should-not rinari-rails-env))
+
+
 (defun should-match-partial (line partial)
   "Asserts that LINE, which is a partial call matches
 `rinari-partial-regex' and that there's only one grouping, which is
