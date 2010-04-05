@@ -116,7 +116,8 @@ to the environment variables outside of Emacs.")
   "\\(:[^[:space:]]*?\\)[[:space:]]*\\(=>[[:space:]]*[\"\':]?\\([^[:space:]]*?\\)[\"\']?[[:space:]]*\\)?[,){}\n]"
   "Regexp matching subsequent key => value pairs of a Ruby Hash.")
 
-(defconst rinari-partial-regex "render[[:blank:]]*:partial[[:blank:]]*=>[[:blank:]]*[@'\"]?\\([A-Za-z/_]+\\)['\"]?"
+(defconst rinari-partial-regex
+  "render[[:blank:]]*:partial[[:blank:]]*=>[[:blank:]]*[@'\"]?\\([A-Za-z/_]+\\)['\"]?"
   "Regexp matching a partial rendering call.")
 
 
