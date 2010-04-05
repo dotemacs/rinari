@@ -92,7 +92,7 @@
 
 (defcustom rinari-tags-file-name
   "TAGS"
-  "Path to your TAGS file inside of your rails project.  See `tags-file-name'."
+  "Path to TAGS file, relative to your rails project. See `tags-file-name'."
   :group 'rinari)
 
 (defvar rinari-minor-mode-hook nil
