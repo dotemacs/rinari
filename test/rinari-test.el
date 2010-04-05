@@ -40,6 +40,12 @@
   (should-match-partial "render(:partial => @partial)" "partial")
   )
 
+;; TODO: Hard to test
+;; (ert-deftest rgrep-file-endings ())
+
+;; TODO: What does this do?
+;; (ert-deftest ruby-hash-regexp ())
+
 (ert-deftest rinari-mode-prefixes ()
   (should (equal 2 (length rinari-minor-mode-prefixes)))
   (should (member ";" rinari-minor-mode-prefixes))
