@@ -95,13 +95,13 @@
   "Path to TAGS file, relative to your rails project. See `tags-file-name'."
   :group 'rinari)
 
-(defvar rinari-minor-mode-hook nil
-  "*Hook for customising Rinari.")
-
 (defcustom rinari-rails-env nil
   "Use this to force a value for RAILS_ENV when running rinari.
 Leave this set to nil to not force any value for RAILS_ENV, and
 leave this to the environment variables outside of Emacs.")
+
+(defvar rinari-minor-mode-hook nil
+  "Hook for customizing Rinari.")
 
 (defvar rinari-minor-mode-prefixes
   (list ";" "'")
