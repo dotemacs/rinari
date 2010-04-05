@@ -117,7 +117,7 @@ leave this to the environment variables outside of Emacs.")
   "Regexp matching subsequent key => value pairs of a Ruby Hash.")
 
 (defconst rinari-partial-regex "render :partial *=> *[@'\"]?\\([A-Za-z/_]+\\)['\"]?"
-  "Regex matching a partial rendering call.")
+  "Regexp matching a partial rendering call.")
 
 (defadvice ruby-compilation-do (around rinari-compilation-do activate)
   "Set default directory to the root of the rails application
