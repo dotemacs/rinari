@@ -142,6 +142,7 @@ running cap processes."
     ad-do-it
     (rinari-launch)))
 
+
 (defun rinari-parse-yaml ()
   (let ((start (point))
 	(end (save-excursion (re-search-forward "^[^:]*$" nil t) (point)))
