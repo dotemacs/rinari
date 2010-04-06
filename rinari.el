@@ -108,11 +108,11 @@ to the environment variables outside of Emacs.")
   "List of characters, each of which will be bound (with C-c) as a
   rinari-minor-mode keymap prefix.")
 
-(defvar rinari-rgrep-file-endings
+(defconst rinari-rgrep-file-endings
   "*.[^l]*"
   "Ending of files to search for matches using `rinari-rgrep'.")
 
-(defvar rinari-ruby-hash-regexp
+(defconst rinari-ruby-hash-regexp
   "\\(:[^[:space:]]*?\\)[[:space:]]*\\(=>[[:space:]]*[\"\':]?\\([^[:space:]]*?\\)[\"\']?[[:space:]]*\\)?[,){}\n]"
   "Regexp matching subsequent key => value pairs of a Ruby Hash.")
 
