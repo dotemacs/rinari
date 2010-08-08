@@ -372,7 +372,7 @@ optional prefix argument just run `rgrep'."
   (grep-compute-defaults)
   (if arg (call-interactively 'rgrep)
     (let ((query))
-      (if (and transient-mark-mode mark-active)
+      (if (region-active-p)
           (setq query (buffer-substring-no-properties (region-beginning) (region-end)))
         (setq query (thing-at-point 'word)))
       (funcall 'rgrep (read-from-minibuffer "search for: " query)
