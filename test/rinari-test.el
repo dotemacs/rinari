@@ -5,13 +5,11 @@
   (should-match-partial "render :partial => partial" "partial")
   (should-match-partial "render :partial => @partial" "partial")
 
-
   ;; Erb
   (should-match-partial "<%= render :partial => \"partial\" %>" "partial")
   (should-match-partial "<%= render :partial => \"part/ial\" %>" "part/ial")
   (should-match-partial "<%= render :partial => partial %>" "partial")
   (should-match-partial "<%= render :partial => @partial %>" "partial")
-
 
   ;; Haml
   (should-match-partial "= render :partial => \"partial\"" "partial")
@@ -19,11 +17,9 @@
   (should-match-partial "= render :partial => partial" "partial")
   (should-match-partial "= render :partial => @partial" "partial")
 
-
   ;; Tags
   (should-match-partial "<div><%= render :partial => \"partial\" %></div>" "partial")
   (should-match-partial "<p class=\"wee\"><%= render :partial => \"partial\" %></p>" "partial")
-
 
   ;; With options
   (should-match-partial "render :partial => \"partial\", :locals => { :some => :variable }" "partial")
@@ -47,9 +43,7 @@
 ;; (ert-deftest ruby-hash-regexp ())
 
 (ert-deftest rinari-mode-prefixes ()
-  (should (equal 2 (length rinari-minor-mode-prefixes)))
-  (should (member ";" rinari-minor-mode-prefixes))
-  (should (member "'" rinari-minor-mode-prefixes)))
+  (should (equal '(";" "'") rinari-minor-mode-prefixes)))
 
 (ert-deftest tags-file-name ()
   (should (equal "TAGS" rinari-tags-file-name)))
