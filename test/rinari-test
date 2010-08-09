@@ -9,6 +9,7 @@
 (add-to-list 'load-path (expand-file-name "ert" (expand-file-name "test" rinari-util-path)))
 
 (require 'ert)
+(require 'ert-batch)
 (require 'rinari)
 
 (load-file (expand-file-name "test-helper.el" rinari-test-path))
