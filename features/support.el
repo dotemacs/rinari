@@ -12,13 +12,3 @@
 (require 'rinari)
 (require 'espuds)
 (require 'ert)
-
-(Before
- (shell-command (concat "mkdir " (expand-file-name "tmp" rinari-root-path)))
- )
-
-(After
- (shell-command (concat "rm -Rf " (expand-file-name "tmp" rinari-root-path)))
-
- (setq rinari-minor-mode-hook '())
- )
