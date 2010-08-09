@@ -7,3 +7,6 @@
 [submodule "util/test/espuds"]
 	path = util/test/espuds
 	url = git://github.com/rejeep/espuds.git
+[submodule "util/test/ert"]
+	path = util/test/ert
+	url = git://github.com/ohler/ert.git
