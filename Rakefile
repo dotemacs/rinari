@@ -39,7 +39,11 @@ namespace "test" do
   task :emacs do
     system "emacs -Q --script #{TESTDIR}/rinari-test"
   end
-  
+
+  desc "Run ecukes"
+  task :ecukes do
+    system "util/test/ecukes/ecukes features/*.feature"
+  end
 end
 
 namespace "doc" do
