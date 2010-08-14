@@ -16,11 +16,16 @@
 (require 'rails-helpers)
 (require 'cl)
 
+(defun remove-tmp ()
+  "Removes tmp folder."
+  (shell-command (concat "rm -Rf " (expand-file-name "tmp" rinari-root-path))))
+
 (Setup
+ (remove-tmp)
  (make-directory (expand-file-name "tmp" rinari-root-path)))
 
 (Teardown
- (shell-command (concat "rm -Rf " (expand-file-name "tmp" rinari-root-path))))
+ (remove-tmp))
 
 (After
  (setq rinari-minor-mode-hook '()))
