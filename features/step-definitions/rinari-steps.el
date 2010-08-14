@@ -23,5 +23,7 @@
 
 (Then "^I should be in \"\\(.+\\)\"$"
       (lambda (buffer)
-        (string= (buffer-name) buffer)))
-
+        (should
+         (string-match-p
+          (concat (buffer-file-name) "$")
+          (buffer-file-name)))))
