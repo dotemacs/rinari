@@ -8,7 +8,10 @@
 
 (When "^I visit \"\\(.+\\)\"$"
       (lambda (file)
-        (find-file (expand-file-name file current-rails-application))))
+        (let* ((app-file (expand-file-name file current-rails-application))
+               (v (vconcat [?\C-x ?\C-f] (string-to-vector app-file))))
+          (should (file-exists-p app-file))
+          (execute-kbd-macro v))))
 
 (Then "^Rinari should be active$"
       (lambda ()
