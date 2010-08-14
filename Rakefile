@@ -41,7 +41,8 @@ namespace "test" do
 
   desc "Run ecukes"
   task :ecukes, :feature do |env, args|
-    system "emacs -Q --script util/test/ecukes/ecukes features/#{args[:feature] || '*'}.feature"
+    feature = "#{args[:feature]}.feature" if args[:feature]
+    system "emacs -Q --script util/test/ecukes/ecukes features/#{feature}"
   end
 end
 
