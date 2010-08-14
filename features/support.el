@@ -1,8 +1,10 @@
 (defvar current-rails-application nil
   "Path to current active Rails application.")
 
-(let ((current-directory (file-name-directory load-file-name)))
-  (setq rinari-root-path (expand-file-name ".." current-directory))
+(let* ((current-directory (file-name-directory load-file-name))
+      (parent-directory (file-name-directory
+			 (directory-file-name current-directory))))
+  (setq rinari-root-path parent-directory)
   (setq rinari-util-path (expand-file-name "util" rinari-root-path)))
 
 (add-to-list 'load-path rinari-root-path)
