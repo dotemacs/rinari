@@ -25,5 +25,5 @@
       (lambda (buffer)
         (should
          (string-match-p
-          (concat (buffer-file-name) "$")
+          (concat buffer "$")
           (buffer-file-name)))))
