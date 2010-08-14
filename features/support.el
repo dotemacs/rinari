@@ -12,3 +12,32 @@
 (require 'rinari)
 (require 'espuds)
 (require 'ert)
+
+(require 'cl)
+
+(defun rails-version()
+  "Determine rails version"
+  (save-excursion
+    (let ((buffer "*rails-version*"))
+      (flet ((kill-buffer-and-return-version (buffer version) 
+					     (progn 
+					       (kill-buffer buffer)
+					       version)))
+	(progn 
+	  (shell-command "rails -v" buffer)
+	  (switch-to-buffer buffer)
+	  (goto-char (point-min))
+	  (if (search-forward "Rails 2" (point-max) t)
+	      (kill-buffer-and-return-version buffer 2)
+	    (progn 
+	      (goto-char (point-min))
+	      (if (search-forward "Rails 3" (point-max) t)
+		  (kill-buffer-and-return-version buffer 3)))))))))
+
+(Setup
+ (make-directory (expand-file-name "tmp" rinari-root-path)))
+
+(Teardown
+;(After
+ (shell-command (concat "rm -Rf " (expand-file-name "tmp" rinari-root-path)))
+ (setq rinari-minor-mode-hook '()))

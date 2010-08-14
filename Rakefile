@@ -24,7 +24,6 @@ task :elpa do
 end
 
 namespace "test" do
-  
   desc "Run tests using `emacs-snapshot'"
   task :snapshot do
     system "emacs-snapshot -Q --script #{TESTDIR}/rinari-test"
@@ -39,7 +38,11 @@ namespace "test" do
   task :emacs do
     system "emacs -Q --script #{TESTDIR}/rinari-test"
   end
-  
+
+  desc "Run ecukes"
+  task :ecukes, :feature do |env, args|
+    system "emacs -Q --script util/test/ecukes/ecukes features/#{args[:feature] || '*'}.feature"
+  end
 end
 
 namespace "doc" do
