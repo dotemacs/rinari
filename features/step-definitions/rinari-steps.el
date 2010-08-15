@@ -13,6 +13,15 @@
           (should (file-exists-p app-file))
           (execute-kbd-macro v))))
 
+(When "^I visit migration \"\\(.+\\)\"$"
+      (lambda (file)
+	(let* ((app-file (car 
+			  (file-expand-wildcards 
+			   (concat (file-name-as-directory current-rails-application) file))))
+               (v (vconcat [?\C-x ?\C-f] (string-to-vector app-file))))
+          (should (file-exists-p app-file))
+          (execute-kbd-macro v))))
+
 (Then "^Rinari should be active$"
       (lambda ()
         (should rinari-minor-mode)))
