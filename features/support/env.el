@@ -1,13 +1,19 @@
 (defvar current-rails-application nil
   "Path to current active Rails application.")
 
-(let* ((current-directory (file-name-directory load-file-name))
-       (parent-directory (file-name-directory (directory-file-name current-directory))))
-  (setq rinari-root-path parent-directory)
-  (setq rinari-util-path (expand-file-name "util" rinari-root-path)))
+(let* ((features-directory
+        (file-name-directory
+         (directory-file-name (file-name-directory load-file-name))))
+       (project-directory
+        (file-name-directory
+         (directory-file-name features-directory))))
+  (setq rinari-root-path project-directory)
+  (setq rinari-util-path (expand-file-name "util" rinari-root-path))
+  (setq rinari-features-path (expand-file-name "features" rinari-root-path)))
 
 (add-to-list 'load-path rinari-root-path)
-(add-to-list 'load-path (expand-file-name "features" rinari-root-path))
+(add-to-list 'load-path rinari-features-path)
+(add-to-list 'load-path (expand-file-name "support" rinari-features-path))
 (add-to-list 'load-path (expand-file-name "espuds" (expand-file-name "test" rinari-util-path)))
 (add-to-list 'load-path (expand-file-name "ert" (expand-file-name "test" rinari-util-path)))
 
