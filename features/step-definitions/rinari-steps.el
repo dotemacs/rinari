@@ -36,3 +36,10 @@
          (string-match-p
           (concat buffer "$")
           (buffer-file-name)))))
+
+(Then "^I should be in non-file buffer \"\\(.+\\)\"$"
+      (lambda (buffer)
+        (should
+         (string-match-p
+	  buffer
+	  (buffer-name)))))
