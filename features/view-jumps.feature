@@ -14,7 +14,7 @@ Feature: View Jumps
     And I press "C-c ; f v"
     And I type "index.html.erb"
     And I execute the action chain
-    Then I should be in "app/views/books/index.html.erb"
+    Then I should be in file "app/views/books/index.html.erb"
 
   Scenario: From controller
     When I visit "app/controllers/books_controller.rb"
@@ -22,7 +22,7 @@ Feature: View Jumps
     And I press "C-c ; f v"
     And I type "show.html.erb"
     And I execute the action chain
-    Then I should be in "app/views/books/show.html.erb"
+    Then I should be in file "app/views/books/show.html.erb"
 
   # Scenario: From controller action
 
@@ -32,7 +32,7 @@ Feature: View Jumps
     And I press "C-c ; f v"
     And I type "new.html.erb"
     And I execute the action chain
-    Then I should be in "app/views/books/new.html.erb"
+    Then I should be in file "app/views/books/new.html.erb"
 
   # Scenario: From migration
   # Scenario: From spec model
@@ -46,7 +46,7 @@ Feature: View Jumps
     And I press "C-c ; f v"
     And I type "edit.html.erb"
     And I execute the action chain
-    Then I should be in "app/views/books/edit.html.erb"
+    Then I should be in file "app/views/books/edit.html.erb"
 
   Scenario: From unit test
     When I visit "test/unit/book_test.rb"
@@ -54,7 +54,7 @@ Feature: View Jumps
     And I press "C-c ; f v"
     And I type "edit.html.erb"
     And I execute the action chain
-    Then I should be in "app/views/books/edit.html.erb"
+    Then I should be in file "app/views/books/edit.html.erb"
 
   Scenario: From fixture
     When I visit "test/fixtures/books.yml"
@@ -62,6 +62,6 @@ Feature: View Jumps
     And I press "C-c ; f v"
     And I type "show.html.erb"
     And I execute the action chain
-    Then I should be in "app/views/books/show.html.erb"
+    Then I should be in file "app/views/books/show.html.erb"
 
   # Scenario: From view to view

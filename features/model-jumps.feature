@@ -11,12 +11,12 @@ Feature: Model Jumps
   Scenario: From view
     When I visit "app/views/books/show.html.erb"
     And I press "C-c ; f m"
-    Then I should be in "app/models/book.rb"
+    Then I should be in file "app/models/book.rb"
 
   Scenario: From helper
     When I visit "app/helpers/books_helper.rb"
     And I press "C-c ; f m"
-    Then I should be in "app/models/book.rb"
+    Then I should be in file "app/models/book.rb"
 
   # Scenario: From migration
   # Scenario: From spec model
@@ -27,16 +27,16 @@ Feature: Model Jumps
   Scenario: From functional test
     When I visit "test/functional/books_controller_test.rb"
     And I press "C-c ; f m"
-    Then I should be in "app/models/book.rb"
+    Then I should be in file "app/models/book.rb"
 
   Scenario: From unit test
     When I visit "test/unit/book_test.rb"
     And I press "C-c ; f m"
-    Then I should be in "app/models/book.rb"
+    Then I should be in file "app/models/book.rb"
 
   Scenario: From fixture
     When I visit "test/fixtures/books.yml"
     And I press "C-c ; f m"
-    Then I should be in "app/models/book.rb"
+    Then I should be in file "app/models/book.rb"
 
   # Scenario: From model to model

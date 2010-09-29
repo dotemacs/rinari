@@ -15,7 +15,7 @@ Feature: Other Jumps
     And I type "development.rb"
     And I press "RET"
     And I execute the action chain
-    Then I should be in "config/environments/development.rb"
+    Then I should be in file "config/environments/development.rb"
 
   # @rails3 (Ecukes does not have tags support, yet)
   # Scenario: To application
@@ -26,7 +26,7 @@ Feature: Other Jumps
     And I type "routes.rb"
     And I press "RET"
     And I execute the action chain
-    Then I should be in "config/routes.rb"
+    Then I should be in file "config/routes.rb"
 
   # @rails2 (Ecukes does not have tags support, yet)
   # Scenario: To script
@@ -39,7 +39,7 @@ Feature: Other Jumps
     And I type "development.log"
     And I press "RET"
     And I execute the action chain
-    Then I should be in "log/development.log"
+    Then I should be in file "log/development.log"
 
   # Scenario: To worker
 
@@ -49,7 +49,7 @@ Feature: Other Jumps
     And I type "index.html"
     And I press "RET"
     And I execute the action chain
-    Then I should be in "public/index.html"
+    Then I should be in file "public/index.html"
 
   # Scenario: To stylesheet
   # Scenario: To sass
@@ -60,7 +60,7 @@ Feature: Other Jumps
     And I type "application.js"
     And I press "RET"
     And I execute the action chain
-    Then I should be in "public/javascripts/application.js"
+    Then I should be in file "public/javascripts/application.js"
 
   # Scenario: To plugin
 
