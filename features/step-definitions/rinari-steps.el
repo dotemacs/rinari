@@ -15,9 +15,9 @@
 
 (When "^I visit migration \"\\(.+\\)\"$"
       (lambda (file)
-	(let* ((app-file (car 
-			  (file-expand-wildcards 
-			   (concat (file-name-as-directory current-rails-application) file))))
+        (let* ((app-file (car
+                          (file-expand-wildcards
+                           (concat (file-name-as-directory current-rails-application) file))))
                (v (vconcat [?\C-x ?\C-f] (string-to-vector app-file))))
           (should (file-exists-p app-file))
           (execute-kbd-macro v))))
@@ -29,17 +29,3 @@
 (Given "^I generate scaffold for \"\\(.+\\)\"$"
        (lambda (name)
          (generate-scaffold name)))
-
-(Then "^I should be in \"\\(.+\\)\"$"
-      (lambda (buffer)
-        (should
-         (string-match-p
-          (concat buffer "$")
-          (buffer-file-name)))))
-
-(Then "^I should be in non-file buffer \"\\(.+\\)\"$"
-      (lambda (buffer)
-        (should
-         (string-match-p
-	  buffer
-	  (buffer-name)))))
