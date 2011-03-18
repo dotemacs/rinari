@@ -24,22 +24,26 @@ task :elpa do
 end
 
 namespace "test" do
-  
   desc "Run tests using `emacs-snapshot'"
   task :snapshot do
-    system "emacs-snapshot -Q -l #{TESTDIR}/init.el"
+    system "emacs-snapshot -Q --script #{TESTDIR}/rinari-test"
   end
 
   desc "Run tests using `emacs-22'"
   task :twenty_two do
-    system "emacs22 -Q -l #{TESTDIR}/init.el"
+    system "emacs22 -Q  --script #{TESTDIR}/rinari-test"
   end
   
   desc "Run tests using `emacs'"
   task :emacs do
-    system "emacs -Q -l #{TESTDIR}/init.el"
+    system "emacs -Q --script #{TESTDIR}/rinari-test"
   end
-  
+
+  desc "Run ecukes"
+  task :ecukes, :feature do |env, args|
+    feature = "#{args[:feature]}.feature" if args[:feature]
+    system "emacs -Q --script util/test/ecukes/ecukes features/#{feature}"
+  end
 end
 
 namespace "doc" do

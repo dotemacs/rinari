@@ -92,44 +92,56 @@
 
 (defcustom rinari-tags-file-name
   "TAGS"
-  "Path to your TAGS file inside of your rails project.  See `tags-file-name'."
+  "Path to TAGS file, relative to your rails project. See `tags-file-name'."
   :group 'rinari)
 
-(defvar rinari-minor-mode-hook nil
-  "*Hook for customising Rinari.")
-
 (defcustom rinari-rails-env nil
-  "Use this to force a value for RAILS_ENV when running rinari.
-Leave this set to nil to not force any value for RAILS_ENV, and
-leave this to the environment variables outside of Emacs.")
+  "Use this to force a value for RAILS_ENV when running rinari.  Leave
+this set to nil to not force any value for RAILS_ENV, and leave this
+to the environment variables outside of Emacs.")
+
+(defvar rinari-minor-mode-hook nil
+  "Hook for customizing Rinari.")
 
 (defvar rinari-minor-mode-prefixes
   (list ";" "'")
-  "List of characters, each of which will be bound (with C-c) as a rinari-minor-mode keymap prefix.")
+  "List of characters, each of which will be bound (with C-c) as a
+  rinari-minor-mode keymap prefix.")
 
-(defvar rinari-partial-regex "render :partial *=> *[@'\"]?\\([A-Za-z/_]+\\)['\"]?"
-  "Regex that matches a partial rendering call.")
+(defconst rinari-rgrep-file-endings
+  "*.[^l]*"
+  "Ending of files to search for matches using `rinari-rgrep'.")
+
+(defconst rinari-ruby-hash-regexp
+  "\\(:[^[:space:]]*?\\)[[:space:]]*\\(=>[[:space:]]*[\"\':]?\\([^[:space:]]*?\\)[\"\']?[[:space:]]*\\)?[,){}\n]"
+  "Regexp matching subsequent key => value pairs of a Ruby Hash.")
+
+(defconst rinari-partial-regex
+  "render[[:blank:]]*(?:partial[[:blank:]]*=>[[:blank:]]*[@'\"]?\\([A-Za-z/_]+\\)['\"]?)?"
+  "Regexp matching a partial rendering call.")
+
 
 (defadvice ruby-compilation-do (around rinari-compilation-do activate)
-  "Set default directory to the root of the rails application
-  before running ruby processes."
+  "Set default directory to the root of the rails application before
+running ruby processes."
   (let ((default-directory (or (rinari-root) default-directory)))
     ad-do-it
     (rinari-launch)))
 
 (defadvice ruby-compilation-rake (around rinari-compilation-rake activate)
-  "Set default directory to the root of the rails application
-  before running rake processes."
+  "Set default directory to the root of the rails application before
+running rake processes."
   (let ((default-directory (or (rinari-root) default-directory)))
     ad-do-it
     (rinari-launch)))
 
 (defadvice ruby-compilation-cap (around rinari-compilation-cap activate)
-  "Set default directory to the root of the rails application
-  before running cap processes."
+  "Set default directory to the root of the rails application before
+running cap processes."
   (let ((default-directory (or (rinari-root) default-directory)))
     ad-do-it
     (rinari-launch)))
+
 
 (defun rinari-parse-yaml ()
   (let ((start (point))
@@ -353,19 +365,15 @@ Supported markup languages are: Erb, Haml"
           (setq file (concat default-directory "_" line)))
         (find-file (concat file (rinari-ending)))))))
 
-(defvar rinari-rgrep-file-endings
-  "*.[^l]*"
-  "Ending of files to search for matches using `rinari-rgrep'")
-
 (defun rinari-rgrep (&optional arg)
-  "Search through the rails project for a string or `regexp'.
-With optional prefix argument just run `rgrep'."
+  "Search through the rails project for a string or `regexp'.  With
+optional prefix argument just run `rgrep'."
   (interactive "P")
   (grep-compute-defaults)
   (if arg (call-interactively 'rgrep)
     (let ((query))
-      (if mark-active
-          (setq query (buffer-substring-no-properties (point) (mark)))
+      (if (region-active-p)
+          (setq query (buffer-substring-no-properties (region-beginning) (region-end)))
         (setq query (thing-at-point 'word)))
       (funcall 'rgrep (read-from-minibuffer "search for: " query)
                rinari-rgrep-file-endings (rinari-root)))))
@@ -396,13 +404,9 @@ With optional prefix argument just run `rgrep'."
            script)))
     (message (shell-command-to-string (concat command " " type " " (read-from-minibuffer (format "create %s: " type) name))))))
 
-(defvar rinari-ruby-hash-regexp
-  "\\(:[^[:space:]]*?\\)[[:space:]]*\\(=>[[:space:]]*[\"\':]?\\([^[:space:]]*?\\)[\"\']?[[:space:]]*\\)?[,){}\n]"
-  "Regexp to match subsequent key => value pairs of a ruby hash.")
-
 (defun rinari-ruby-values-from-render (controller action)
-  "Adjusts CONTROLLER and ACTION acording to keyword arguments in
-the hash at `point', then return (CONTROLLER . ACTION)"
+  "Adjusts CONTROLLER and ACTION according to keyword arguments in the
+hash at `point', then return (CONTROLLER . ACTION)"
   (let ((end (save-excursion
 	       (re-search-forward "[^,{(]$" nil t)
 	       (+ 1 (point)))))
