@@ -153,6 +153,11 @@ leave this to the environment variables outside of Emacs.")
       (unless (string-match "\\(^[[:alpha:]]:/$\\|^/[^\/]+:/?$\\|^/$\\)" dir)
         (rinari-root new-dir)))))
 
+
+(defun gemfile-present()
+  "confirm if Gemfile is present in the project"
+  (file-exists-p (expand-file-name "Gemfile" (rinari-root))))
+
 ;;--------------------------------------------------------------------------------
 ;; user functions
 
@@ -257,11 +262,12 @@ argument allows editing of the console command arguments."
   (let* ((default-directory (rinari-root))
          (script (rinari-script-path))
          (command
-          (expand-file-name
-           (if (file-exists-p (expand-file-name "console" script))
-               "console"
-             "rails console")
-           script)))
+          (if (gemfile-present)
+              "bundle exec rails console"
+            (expand-file-name
+              (if (file-exists-p (expand-file-name "console" script))
+                  "console"
+                "rails console")))))
 
     ;; Start console in correct environment.
     (if rinari-rails-env
